@@ -1,22 +1,19 @@
 import React from "react";
 
-type Note = {
-    id: number;
-    title: string;
-    content: string;
-}
+import type { Note as NoteType } from "../types";
+import Note from "./Note";
 
 type Props = {
-    notes: Note[],
-    onAddNote: (note: Note) => void;
-    onUpdateNote: (note: Note) => void;
-    onDeleteNote: (note: Node) => void;
+    notes: NoteType[],
+    onAddNote: (note: NoteType) => void;
+    onUpdateNote: (note: NoteType) => void;
+    onDeleteNote: (note: NoteType) => void;
 }
 
 export default function Notes({ notes, onAddNote, onUpdateNote, onDeleteNote }: Props) {
     return (
         <div className="Notes">
-            {notes.map(note => note)}
+            {notes.map(note => <Note title={note.title} content={note.content}  />)}
             <ul>
                 <li>
                     <a href="#">
