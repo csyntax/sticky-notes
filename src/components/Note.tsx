@@ -1,13 +1,23 @@
-import React from "react";
-import type { Note as NoteType } from "../types";
+import React, { FormEvent, useCallback, useState } from "react";
 
 import styles from "./note.module.css";
 
-export default function Note({ title, content }: NoteType) {
+type Props = {
+    title: string,
+    content: string;
+}
+
+export default function Note({ title, content }: Props) {
+    const [note, setNote] = useState({ title, content });
+
     return (
         <article className={styles.Note}>
-            <input type="text" placeholder="Note title" value={title} className={styles.NoteTitle} />
-            <textarea className={styles.NoteContent}>{content}</textarea>
+            <div>
+                <input type="text" placeholder="Note title" defaultValue={note.title} className={styles.NoteTitle} />
+            </div>
+            <div>
+                <textarea className={styles.NoteContent}>{note.content}</textarea>
+            </div>
         </article>
     );
 }

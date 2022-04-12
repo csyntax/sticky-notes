@@ -16,17 +16,9 @@ export default function App() {
         setNotes(oldNotes => [...oldNotes, note]);
     };
 
-    const onUpdateNote = () => {
-
-    };
-
-    const onDeleteNote = () => {
-
-    };
-
     return (
         <div className="App">
-           <Notes notes={notes} onAddNote={onAddNote} onUpdateNote={onUpdateNote} onDeleteNote={onDeleteNote} />
+           <Notes notes={notes} />
            <button onClick={onAddNote}>Add empty note</button>
         </div>
     );
