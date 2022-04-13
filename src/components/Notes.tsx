@@ -13,7 +13,7 @@ type Props = {
 export default function Notes({ notes, onChangeNote }: Props) {
     return (
         <main className={styles.Notes}>
-            {notes.map((note, index) => <Note title={note.title} content={note.content} key={index} onChangeNote={onChangeNote} />)}
+            {notes.map((note, index) => <Note id={note.id} title={note.title} content={note.content} key={note.id} onChangeNote={onChangeNote} />)}
         </main>
     );
 }
