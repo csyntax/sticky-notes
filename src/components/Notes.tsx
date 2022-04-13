@@ -6,13 +6,14 @@ import Note from "./Note";
 import styles from "./notes.module.css";
 
 type Props = {
-    notes: NoteType[]
+    notes: NoteType[],
+    onChangeNote: (note: NoteType) => void,
 }
 
-export default function Notes({ notes }: Props) {
+export default function Notes({ notes, onChangeNote }: Props) {
     return (
         <main className={styles.Notes}>
-            {notes.map(note => <Note title={note.title} content={note.content} />)}
+            {notes.map((note, index) => <Note title={note.title} content={note.content} key={index} onChangeNote={onChangeNote} />)}
         </main>
     );
 }
