@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useSyncExternalStore } from 'react';
 import Notes from './components/Notes';
 
 import styles from "./App.module.css";

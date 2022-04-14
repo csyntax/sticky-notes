@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { useState, useCallback } from "react";
 
 import styles from "./note.module.css";
 
@@ -12,30 +12,30 @@ type Props = {
 export default function Note({ id, title, content, onChangeNote }: Props) {
     const [note, setNote] = useState({ id, title, content });
 
-    function onChange(event: FormEvent) {
+    const onNoteFormChange = useCallback((event: React.FormEvent) => {
         event.preventDefault();
-        
+
         onChangeNote(note);
-    }
+    }, [note]);
 
-    function handleChange(event: any) {
-        const value = (event.target as any).value;
+    const handleInputChange = useCallback((event: React.FormEvent) => {
         const name = (event.target as any).name;
-
+        const value = (event.target as any).value;
+        
         setNote({
             ...note,
             [name]: value
         });
-    }
+    }, [note]);
 
     return (
         <article className={styles.Note}>
-            <form onChange={onChange}>
+            <form onChange={onNoteFormChange}>
                 <div>
-                    <input type="text" name="title" value={note.title} onChange={handleChange} className={styles.NoteTitle} />
+                    <input type="text" name="title" value={note.title} onChange={handleInputChange} className={styles.NoteTitle} />
                 </div>
                 <div>
-                    <textarea name="content" value={note.content} onChange={handleChange} className={styles.NoteContent}></textarea>
+                    <textarea name="content" value={note.content} onChange={handleInputChange} className={styles.NoteContent} />
                 </div>
             </form>
         </article>
