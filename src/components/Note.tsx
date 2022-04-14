@@ -1,5 +1,4 @@
 import React, { FormEvent, useState } from "react";
-import type { Note as NoteType } from "../types";
 
 import styles from "./note.module.css";
 
@@ -7,7 +6,7 @@ type Props = {
     id: number;
     title: string,
     content: string;
-    onChangeNote: (note: NoteType) => void;
+    onChangeNote: (note: any) => void;
 }
 
 export default function Note({ id, title, content, onChangeNote }: Props) {
