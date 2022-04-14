@@ -5,8 +5,6 @@ import Note from "./Note";
 
 import styles from "./notes.module.css";
 
-// {notes.map((note, index) => <Note id={note.id} title={note.title} content={note.content} key={note.id} onChangeNote={onChangeNote} />)}
-
 export default function Notes() {
     const [notes, setNotes] = useState<NoteModel[]>([]);
 
@@ -25,9 +23,13 @@ export default function Notes() {
     };
 
     return (
-        <main className={styles.Notes}>
-            {notes.map((note, index) => <Note id={note.id} title={note.title} content={note.content} key={note.id} onChangeNote={onChangeNote} />)}
-            <button onClick={addEmptyNote}>Add empty note</button>
-        </main>
+        <>
+            <header>
+                <button onClick={addEmptyNote} className={styles.AddBtn}>Add empty note</button>
+            </header>
+            <main className={styles.Notes}>
+                {notes.map((note, index) => <Note id={note.id} title={note.title} content={note.content} key={index} onChangeNote={onChangeNote} />)}
+            </main>
+        </>
     );
 }

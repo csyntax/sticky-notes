@@ -5,3 +5,19 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+
+.AddBtn {
+    border: none;
+    margin: 0;
+    padding: 0.45rem;
+    font-size: 15px;
+    font-weight: 900;
+    color: #DAFDBA;
+    background: #13678A;
+    border-radius: 5px;
+}
+
+.AddBtn:hover {
+    color: #13678A;
+    background: #DAFDBA;
+}
