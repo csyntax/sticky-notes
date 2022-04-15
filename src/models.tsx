@@ -1,9 +1,13 @@
-export class NoteModel {
-    static ID: number = 0;
+import { uniqueId } from 'lodash';
 
-    public id: number;
+function generateId(name: string) {
+    const now = Date.now();
+
+    return uniqueId(`${name}-${now}`);
+}
+
+export class NoteModel {
+    public id: string = generateId(this.title);
     
-    constructor (public title: string, public content: string) {
-        this.id = ++NoteModel.ID;
-    }
+    constructor (public title: string, public content: string) { }
 }

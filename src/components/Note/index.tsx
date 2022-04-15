@@ -1,16 +1,17 @@
 import React, { useState, useCallback } from "react";
+import { NoteModel } from "../../models";
 
 import styles from "./note.module.css";
 
 type Props = {
-    id: number;
+    id: string;
     title: string,
     content: string;
-    onChangeNote: (note: any) => void;
+    onChangeNote: (note: NoteModel) => void;
 }
 
 export default function Note({ id, title, content, onChangeNote }: Props) {
-    const [note, setNote] = useState({ id, title, content });
+    const [note, setNote] = useState<NoteModel>({ id, title, content });
 
     const onNoteFormChange = useCallback((event: React.FormEvent) => {
         event.preventDefault();
