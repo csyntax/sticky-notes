@@ -4,12 +4,26 @@
     text-decoration:none;
     color:#000;
     background: #BDE038;
-    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
 }
 
 .Note:hover,
 .Note:focus {
     transform: scale(1.1);
+}
+
+.delBtn {
+    padding: 5px;
+    border: 1px solid #D96941;
+    border-radius: 50%;
+    background: none;
+    color: #D96941;
+}
+
+.delBtn:hover,
+.delBtn:focus {
+    border-color: #A62B1F;
+    color: #A62B1F;
 }
 
 .NoteTitle {

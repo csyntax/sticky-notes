@@ -10,7 +10,6 @@ const STORAGE_KEY = "NOTES";
 
 export default function Notes() {
     const initialNotes = storage.get(STORAGE_KEY, []);
-
     const [notes, setNotes] = useState<NoteModel[]>(initialNotes);
 
     useEffect(() => {

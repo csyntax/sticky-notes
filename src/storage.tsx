@@ -1,4 +1,4 @@
-export default {
+const storage = {
     get(key: string, defaultValue: any = undefined): any {
         const value = window.localStorage.getItem(key);
         
@@ -8,3 +8,5 @@ export default {
         window.localStorage.setItem(key, JSON.stringify(value));
     }
 };
+
+export default storage;

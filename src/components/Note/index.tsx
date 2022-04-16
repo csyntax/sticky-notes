@@ -5,7 +5,7 @@ import styles from "./note.module.css";
 
 type Props = {
     id: string;
-    title: string,
+    title: string;
     content: string;
     onUpdateNote: (note: NoteModel) => void;
     onDeleteNote: (note: NoteModel) => void;
@@ -30,13 +30,11 @@ export default function Note({ id, title, content, onUpdateNote, onDeleteNote }:
         });
     }, []);
 
-    const deleteNote = useCallback(() => {
-        onDeleteNote(note);
-    }, []);
+    const deleteNote = useCallback(() => onDeleteNote(note), []);
 
     return (
         <article className={styles.Note}>
-            <button onClick={deleteNote}>Delete</button>
+            <button onClick={deleteNote} className={styles.delBtn}>X</button>
             <form onChange={onNoteFormChange}>
                 <div>
                     <input type="text" name="title" value={note.title} onChange={handleInputChange} className={styles.NoteTitle} />
