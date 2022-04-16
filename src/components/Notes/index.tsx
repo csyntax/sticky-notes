@@ -36,12 +36,10 @@ export default function Notes() {
                 <button onClick={() => setNotes([])} className={styles.AddBtn}>Clear all notes</button>
             </header>
             <main className={styles.Notes}>
-                {notes.map((note) => 
-                    <Note 
+                {notes.map(note =>
+                    <Note
+                        {...note}
                         key={note.id} 
-                        id={note.id}
-                        title={note.title}
-                        content={note.content} 
                         onUpdateNote={onUpdateNote}
                         onDeleteNote={onDeleteNote}
                     />
