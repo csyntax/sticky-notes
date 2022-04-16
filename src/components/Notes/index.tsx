@@ -21,17 +21,30 @@ export default function Notes() {
         setNotes(oldNotes => [...oldNotes, new NoteModel("Empty note title", "Empty note content")]);
     }, []);
 
-    const onChangeNote = useCallback((note: NoteModel) => {
+    const onUpdateNote = useCallback((note: NoteModel) => {
         setNotes(oldNotes => oldNotes.map(n => n.id === note.id ? note : n));
+    }, []);
+
+    const onDeleteNote = useCallback((note: NoteModel) => {
+        
     }, []);
 
     return (
         <>
             <header>
                 <button onClick={addEmptyNote} className={styles.AddBtn}>Add empty note</button>
+                <button onClick={() => setNotes([])} className={styles.AddBtn}>Clear all notes</button>
             </header>
             <main className={styles.Notes}>
-                {notes.map((note, index) => <Note id={note.id} title={note.title} content={note.content} key={index} onChangeNote={onChangeNote} />)}
+                {notes.map((note) => <Note 
+                        key={note.id} 
+                        id={note.id}
+                        title={note.title}
+                        content={note.content} 
+                        onUpdateNote={onUpdateNote}
+                        onDeleteNote={onDeleteNote}
+                    />
+                )}
             </main>
         </>
     );
