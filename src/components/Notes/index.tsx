@@ -26,7 +26,7 @@ export default function Notes() {
     }, []);
 
     const onDeleteNote = useCallback((note: NoteModel) => {
-        
+        setNotes(oldNotes => oldNotes.filter(n => n.id !== note.id));
     }, []);
 
     return (
@@ -36,7 +36,8 @@ export default function Notes() {
                 <button onClick={() => setNotes([])} className={styles.AddBtn}>Clear all notes</button>
             </header>
             <main className={styles.Notes}>
-                {notes.map((note) => <Note 
+                {notes.map((note) => 
+                    <Note 
                         key={note.id} 
                         id={note.id}
                         title={note.title}
