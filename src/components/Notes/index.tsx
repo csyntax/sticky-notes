@@ -9,7 +9,7 @@ import styles from "./notes.module.css";
 const STORAGE_KEY = "NOTES";
 
 export default function Notes() {
-    const initialNotes = JSON.parse(storage.get(STORAGE_KEY));
+    const initialNotes = storage.get(STORAGE_KEY, []);
 
     const [notes, setNotes] = useState<NoteModel[]>(initialNotes);
 
