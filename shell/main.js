@@ -1,35 +1,40 @@
-const url = require("url");
-const path = require("path");
-const electron = require("electron");
-
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-
-let mainWindow;
+const { join } = require("path");
+const { app, BrowserWindow } = require("electron");
+const isDev = require("electron-is-dev");
 
 function createWindow() {
-    mainWindow = new BrowserWindow({
-        width: 800, 
-        height: 800,
+    const mainWindow = new BrowserWindow({
+        maxWidth: 950,
+        maxHeight: 950,
+        webPreferences: {
+            nodeIntegration: true,
+        },
+        minimizable: true,
+        autoHideMenuBar: true,
+        fullscreenable: false,
     });
 
-    mainWindow.loadURL('http://localhost:3000');
+    mainWindow.loadURL(`file://${join(__dirname, "../app/build/index.html")}`);
 
-    mainWindow.on('closed', function () {
+    mainWindow.on("closed", () => {
         mainWindow = null;
     });
+
+    if (isDev) {
+        mainWindow.webContents.openDevTools({ mode: "detach" });
+    }
 }
 
-app.on('ready', createWindow);
+app.whenReady().then(createWindow);
 
-app.on('window-all-closed', function () {
-    if (process.platform !== 'darwin') {
+app.on("window-all-closed", () => {
+    if (process.platform !== "darwin") {
         app.quit();
     }
 });
 
-app.on('activate', function () {
-    if (mainWindow === null) {
+app.on("activate", () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
         createWindow();
     }
 });

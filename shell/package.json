@@ -5,11 +5,11 @@
   "main": "main.js",
   "author": "Ivan Ivanov",
   "license": "MIT",
-  "private": true,
   "scripts": {
     "start": "electron ."
   },
   "devDependencies": {
-    "electron": "^18.0.4"
+    "electron": "^18.0.4",
+    "electron-is-dev": "^2.0.0"
   }
 }

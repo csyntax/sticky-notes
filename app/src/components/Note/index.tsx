@@ -1,5 +1,9 @@
 import React, { useState, useCallback } from "react";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
+
 import { NoteModel } from "../../models";
+import { IconButton } from "../Button";
+import { TextInput, TextArea } from "../Input";
 
 import styles from "./note.module.css";
 
@@ -18,7 +22,7 @@ export default function Note({ id, title, content, onUpdateNote, onDeleteNote }:
         event.preventDefault();
 
         onUpdateNote(note);
-    }, []);
+    }, [note]);
 
     const handleInputChange = useCallback((event: React.FormEvent) => {
         const name = (event.target as any).name;
@@ -28,19 +32,19 @@ export default function Note({ id, title, content, onUpdateNote, onDeleteNote }:
             ...note,
             [name]: value
         });
-    }, []);
+    }, [note]);
 
-    const deleteNote = useCallback(() => onDeleteNote(note), []);
+    const deleteNote = useCallback(() => onDeleteNote(note), [note]);
 
     return (
         <article className={styles.Note}>
-            <button onClick={deleteNote} className={styles.delBtn}>X</button>
+            <IconButton onClick={deleteNote} className={styles.delBtn} icon={faClose} />
             <form onChange={onNoteFormChange}>
                 <div>
-                    <input type="text" name="title" value={note.title} onChange={handleInputChange} className={styles.NoteTitle} />
+                    <TextInput name="title" value={note.title} onChange={handleInputChange} className={styles.NoteTitle} />
                 </div>
                 <div>
-                    <textarea name="content" value={note.content} onChange={handleInputChange} className={styles.NoteContent} />
+                    <TextArea name="content" value={note.content} onChange={handleInputChange} className={styles.NoteContent} />
                 </div>
             </form>
         </article>
