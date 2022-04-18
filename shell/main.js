@@ -1,6 +1,5 @@
 const { join } = require("path");
 const { app, BrowserWindow } = require("electron");
-const isDev = require("electron-is-dev");
 
 function createWindow() {
     const mainWindow = new BrowserWindow({
@@ -14,15 +13,11 @@ function createWindow() {
         fullscreenable: false,
     });
 
-    mainWindow.loadURL(`file://${join(__dirname, "../app/build/index.html")}`);
+    mainWindow.loadURL(`file://${join(__dirname, "build/index.html")}`);
 
     mainWindow.on("closed", () => {
         mainWindow = null;
     });
-
-    if (isDev) {
-        mainWindow.webContents.openDevTools({ mode: "detach" });
-    }
 }
 
 app.whenReady().then(createWindow);

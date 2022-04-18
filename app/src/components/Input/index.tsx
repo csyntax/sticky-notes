@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useId } from "react";
 
 type TextInputProps = {
     name: string;
@@ -8,7 +8,14 @@ type TextInputProps = {
 }
 
 export const TextInput = React.forwardRef((props: TextInputProps, ref: any) => {
-    return <input type="text" ref={ref} {...props} />
+    const id = useId();
+
+    return (
+        <>
+            <label htmlFor={id}>{props.name}</label>
+            <input id={id} type="text" ref={ref} {...props} />
+        </>
+    );
 });
 
 type TextAreaProps = {
@@ -19,5 +26,12 @@ type TextAreaProps = {
 }
 
 export const TextArea = React.forwardRef((props: TextAreaProps, ref: any) => {
-    return <textarea ref={ref} {...props} />
+    const id = useId();
+
+    return (
+        <>
+            <label htmlFor={id}>{props.name}</label>
+            <textarea id={id} ref={ref} {...props} />
+        </>
+    );
 });
