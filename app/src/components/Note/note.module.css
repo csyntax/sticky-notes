@@ -29,19 +29,12 @@
 .NoteTitle {
     font-weight: bold;
     font-size: 2rem;
-    background: transparent;
-    border: none;
     color: #818274;
 }
 
 .NoteContent {
     font-size: 1rem;
     font-weight: normal;
-    background: transparent;
-    border: none;
-    outline: none;
-    resize: none;
-    overflow: auto;
     text-align: justify;
     width: 100%;
     height: 150px;

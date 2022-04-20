@@ -11,3 +11,15 @@ export class NoteModel {
     
     constructor (public title: string, public content: string) { }
 }
+
+enum Flag {
+    
+}
+
+interface INote {
+    id: string;
+    title: string;
+    contet: string;
+    date: string;
+    flag: Flag;
+}
