@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef } from "react";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 
-import { NoteModel } from "../../models";
+import { INote } from "../../models";
 import { IconButton } from "../Button";
 import { TextInput, TextArea } from "../Input";
 
@@ -9,19 +9,20 @@ import styles from "./note.module.css";
 
 type Props = {
     id: string;
+    date: string;
     title: string;
     content: string;
-    onUpdateNote: (note: NoteModel) => void;
-    onDeleteNote: (note: NoteModel) => void;
+    onUpdateNote: (note: INote) => void;
+    onDeleteNote: (note: INote) => void;
 }
 
-export default function Note({ id, title, content, onUpdateNote, onDeleteNote }: Props) {
-    const [note, setNote] = useState<NoteModel>({ id, title, content });
+export default function Note({ id, title, content, date, onUpdateNote, onDeleteNote }: Props) {
+    const [note, setNote] = useState<INote>({ id, title, content, date });
 
     const titleRef = useRef(null);
     const contentRef = useRef(null);
 
-    const handleInputChange = useCallback((event: React.FormEvent) => {
+    const onInputChange = useCallback((event: React.FormEvent) => {
         const name = (event.target as any).name;
         const value = (event.target as any).value;
 
@@ -36,13 +37,14 @@ export default function Note({ id, title, content, onUpdateNote, onDeleteNote }:
     return (
         <article className={styles.Note}>
             <IconButton onClick={() => onDeleteNote(note)} className={styles.delBtn} icon={faClose} />
-            <form onChange={() => onUpdateNote(note)}>
+            <form onChange={() => onUpdateNote(note)} onSubmit={e => e.preventDefault()}>
                 <div className={styles.NoteTitle}>
-                    <TextInput name="title" value={note.title} onChange={handleInputChange} ref={titleRef} />
+                    <TextInput name="title" value={note.title} onChange={onInputChange} ref={titleRef} />
                 </div>
                 <div className={styles.NoteContent}>
-                    <TextArea name="content" value={note.content} onChange={handleInputChange} ref={contentRef} />
+                    <TextArea name="content" value={note.content} onChange={onInputChange} ref={contentRef} />
                 </div>
+                <span style={{display: "none"}}>{note.date}</span>
             </form>
         </article>
     );

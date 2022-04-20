@@ -1,32 +1,39 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { uniqueId } from "lodash";
 
-import Note from "../Note";
+import Note from "./Note";
+import { IconButton } from "../Button";
+
+import { INote } from "../../models";
 import storage from "../../storage";
-import { NoteModel } from "../../models";
 
 import styles from "./notes.module.css";
-import { IconButton } from "../Button";
 
 const STORAGE_KEY = "NOTES";
 
 export default function Notes() {
     const initialNotes = storage.get(STORAGE_KEY, []);
-    const [notes, setNotes] = useState<NoteModel[]>(initialNotes);
+    const [notes, setNotes] = useState<INote[]>(initialNotes);
 
-    useEffect(() => {
-        storage.set(STORAGE_KEY, notes);
-    }, [notes]);
+    useEffect(() => storage.set(STORAGE_KEY, notes), [notes]);
 
     const addEmptyNote = useCallback(() => {
-        setNotes(oldNotes => [...oldNotes, new NoteModel("Empty note title", "Empty note content")]);
+        let newNote: INote = {
+            id: uniqueId(`abc-${Date.now()}-xyz`),
+            title: "Empty note title",
+            content: "Empty note content",
+            date: Date.now().toString(),
+        };
+
+        setNotes(oldNotes => [newNote, ...oldNotes]);
     }, []);
 
-    const onUpdateNote = useCallback((note: NoteModel) => {
+    const onUpdateNote = useCallback((note: INote) => {
         setNotes(oldNotes => oldNotes.map(n => n.id === note.id ? note : n));
     }, []);
 
-    const onDeleteNote = useCallback((note: NoteModel) => {
+    const onDeleteNote = useCallback((note: INote) => {
         setNotes(oldNotes => oldNotes.filter(n => n.id !== note.id));
     }, []);
 
@@ -46,6 +53,7 @@ export default function Notes() {
                     />
                 )}
             </main>
+            <footer></footer>
         </>
     );
 }

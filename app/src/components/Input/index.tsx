@@ -1,5 +1,5 @@
-import React, { useEffect, useId } from "react";
 import autosize from "autosize";
+import React, { useId, useEffect } from "react";
 
 import styles from "./input.module.css";
 
