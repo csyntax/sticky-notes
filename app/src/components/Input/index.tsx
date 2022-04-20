@@ -1,5 +1,7 @@
 import React, { useId } from "react";
 
+import styles from "./input.module.css";
+
 type TextInputProps = {
     name: string;
     value: any;
@@ -12,7 +14,7 @@ export const TextInput = React.forwardRef((props: TextInputProps, ref: any) => {
 
     return (
         <>
-            <label htmlFor={id}>{props.name}</label>
+            <label htmlFor={id} className={styles.Label}>{props.name}</label>
             <input id={id} type="text" ref={ref} {...props} />
         </>
     );
@@ -30,7 +32,7 @@ export const TextArea = React.forwardRef((props: TextAreaProps, ref: any) => {
 
     return (
         <>
-            <label htmlFor={id}>{props.name}</label>
+            <label htmlFor={id} className={styles.Label}>{props.name}</label>
             <textarea id={id} ref={ref} {...props} />
         </>
     );

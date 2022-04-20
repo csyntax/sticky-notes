@@ -18,28 +18,22 @@ type Props = {
 export default function Note({ id, title, content, onUpdateNote, onDeleteNote }: Props) {
     const [note, setNote] = useState<NoteModel>({ id, title, content });
 
-    const onNoteFormChange = useCallback((event: React.FormEvent) => {
-        event.preventDefault();
-
-        onUpdateNote(note);
-    }, [note]);
-
     const handleInputChange = useCallback((event: React.FormEvent) => {
         const name = (event.target as any).name;
         const value = (event.target as any).value;
-        
-        setNote({
-            ...note,
-            [name]: value
-        });
-    }, [note]);
 
-    const deleteNote = useCallback(() => onDeleteNote(note), [note]);
+        setNote(prevNote => {
+            return {
+                ...prevNote,
+                [name]: value,
+            };
+        });
+    }, []);
 
     return (
         <article className={styles.Note}>
-            <IconButton onClick={deleteNote} className={styles.delBtn} icon={faClose} />
-            <form onChange={onNoteFormChange}>
+            <IconButton onClick={() => onDeleteNote(note)} className={styles.delBtn} icon={faClose} />
+            <form onChange={() => onUpdateNote(note)}>
                 <div>
                     <TextInput name="title" value={note.title} onChange={handleInputChange} className={styles.NoteTitle} />
                 </div>

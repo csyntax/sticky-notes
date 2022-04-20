@@ -8,14 +8,14 @@ type ButtonProps = {
     onClick?: () => void;
 }
 
+export function Button(props: ButtonProps) {
+    return <button {...props} />
+}
+
 type IconButtonProps = {
     icon: IconDefinition;
     className?: string;
     onClick?: () => void;
-}
-
-export function Button(props: ButtonProps) {
-    return <button {...props} />
 }
 
 export function IconButton({ icon, className, onClick }: IconButtonProps) {
