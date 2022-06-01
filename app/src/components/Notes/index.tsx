@@ -18,7 +18,7 @@ export default function Notes() {
 
     useEffect(() => storage.set(STORAGE_KEY, notes), [notes]);
 
-    const addEmptyNote = useCallback(() => {
+    const onAddNote = () => {
         let newNote: INote = {
             id: uniqueId(`abc-${Date.now()}-xyz`),
             title: "Empty note title",
@@ -27,20 +27,20 @@ export default function Notes() {
         };
 
         setNotes(oldNotes => [newNote, ...oldNotes]);
-    }, []);
+    };
 
-    const onUpdateNote = useCallback((note: INote) => {
+    const onUpdateNote = (note: INote) => {
         setNotes(oldNotes => oldNotes.map(n => n.id === note.id ? note : n));
-    }, []);
+    };
 
-    const onDeleteNote = useCallback((note: INote) => {
+    const onDeleteNote = (note: INote) => {
         setNotes(oldNotes => oldNotes.filter(n => n.id !== note.id));
-    }, []);
+    };
 
     return (
         <>
             <header>
-                <IconButton onClick={addEmptyNote} className={styles.AddBtn} icon={faPlus} />
+                <IconButton onClick={onAddNote} className={styles.AddBtn} icon={faPlus} />
                 <IconButton onClick={() => setNotes([])} className={styles.AddBtn} icon={faTrash} />
             </header>
             <main className={styles.Notes}>

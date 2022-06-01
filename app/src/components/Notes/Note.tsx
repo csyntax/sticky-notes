@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState } from "react";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 
 import { INote } from "../../models";
@@ -7,7 +7,7 @@ import { TextInput, TextArea } from "../Input";
 
 import styles from "./note.module.css";
 
-type Props = {
+type NoteProps = {
     id: string;
     date: string;
     title: string;
@@ -16,13 +16,10 @@ type Props = {
     onDeleteNote: (note: INote) => void;
 }
 
-export default function Note({ id, title, content, date, onUpdateNote, onDeleteNote }: Props) {
+export default function Note({ id, title, content, date, onUpdateNote, onDeleteNote }: NoteProps) {
     const [note, setNote] = useState<INote>({ id, title, content, date });
 
-    const titleRef = useRef(null);
-    const contentRef = useRef(null);
-
-    const onInputChange = useCallback((event: React.FormEvent) => {
+    const onInputChange = (event: React.FormEvent) => {
         const name = (event.target as any).name;
         const value = (event.target as any).value;
 
@@ -32,17 +29,17 @@ export default function Note({ id, title, content, date, onUpdateNote, onDeleteN
                 [name]: value,
             };
         });
-    }, []);
+    };
 
     return (
         <article className={styles.Note}>
             <IconButton onClick={() => onDeleteNote(note)} className={styles.delBtn} icon={faClose} />
             <form onChange={() => onUpdateNote(note)} onSubmit={e => e.preventDefault()}>
                 <div className={styles.NoteTitle}>
-                    <TextInput name="title" value={note.title} onChange={onInputChange} ref={titleRef} />
+                    <TextInput name="title" value={note.title} onChange={onInputChange} />
                 </div>
                 <div className={styles.NoteContent}>
-                    <TextArea name="content" value={note.content} onChange={onInputChange} ref={contentRef} />
+                    <TextArea name="content" value={note.content} onChange={onInputChange} />
                 </div>
                 <span style={{display: "none"}}>{note.date}</span>
             </form>

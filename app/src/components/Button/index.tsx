@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 type ButtonProps = {
-    children: React.ReactChild;
+    children: React.ReactNode;
     className?: string;
     onClick?: () => void;
 }
