@@ -1,13 +1,5 @@
-import React from 'react';
-
-import Notes from './components/Notes';
-
-import styles from "./App.module.css";
+import Notes from "./components/Notes";
 
 export default function App() {
-    return (
-        <div className={styles.App}>
-            <Notes />
-        </div>
-    );
+    return <Notes />;
 }

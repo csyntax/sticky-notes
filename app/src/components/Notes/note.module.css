@@ -1,42 +1,51 @@
-.Note {
+.note {
     margin:1em;
     padding:1em;
     text-decoration:none;
-    color:#000;
-    background: #BDE038;
-    box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+    color: rgba(29, 89, 78, 1);
+    background: rgba(242, 202, 4, 1);
+    box-shadow: 5px 5px 7px rgba(242, 135, 4, 0.5);
 }
 
-.Note:hover,
-.Note:focus {
-    transform: scale(1.1);
-}
-
-.delBtn {
-    padding: 5px;
-    border: 1px solid #D96941;
-    border-radius: 50%;
-    background: none;
-    color: #D96941;
-}
-
-.delBtn:hover,
-.delBtn:focus {
-    border-color: #A62B1F;
-    color: #A62B1F;
-}
-
-.NoteTitle {
-    font-weight: bold;
+.btn {
     font-size: 2rem;
-    color: #818274;
+    border: none;
+    background: transparent;
+    color: rgba(242, 48, 48, 1);
 }
 
-.NoteContent {
-    font-size: 1rem;
-    font-weight: normal;
-    text-align: justify;
+.btn:hover {
+    color: rgba(242, 135, 4, 1);
+}
+
+.title {
+    display: block;
+    border: none;
+    resize: none;
+    outline: none;
+    overflow: auto;
+    max-height: auto;
+    font-size: 2rem;
+    font-weight: bold;
+    background: transparent;
+    color: rgba(0, 32, 48, 0.9);
+}
+
+.title:focus,
+.content:focus {
+    outline: none;
+}
+
+.content {
+    display: block;
+    border: none;
+    outline: none;
     width: 100%;
     height: 150px;
-    color: #A3AB78;
+    font-size: 1rem;
+    font-weight: normal;
+    background: transparent;
+    color: rgba(29, 89, 78, 1);
+
+    overflow: hidden;
 }

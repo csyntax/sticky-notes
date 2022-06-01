@@ -1,23 +1,39 @@
-.Notes {
-    margin:0;
-    padding:0;
+.notes {
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.AddBtn {
+.nav {
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    text-align: center;
+}
+
+.nav div {
+    padding: 1rem;
+    margin: 0.5rem auto;
+    max-width: 350px;
+    border-radius: 5px;
+    background: rgba(0, 32, 48, 0.9);
+}
+
+.btn {
     border: none;
     margin: 0 0.75rem;
     padding: 0.45rem;
-    font-size: 15px;
+    font-size: 1.35rem;
     font-weight: 900;
-    color: #DAFDBA;
-    background: #13678A;
     border-radius: 5px;
+    color: rgba(18, 103, 138, 1);
+    background: rgba(153, 234, 162, 1);
 }
 
-.AddBtn:hover {
-    color: #13678A;
-    background: #DAFDBA;
+.btn:hover {
+    color: rgba(217, 252, 186, 1);
+    background: rgba(68, 196, 175, 1);
 }

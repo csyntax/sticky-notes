@@ -1,59 +1,58 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { uniqueId } from "lodash";
 
 import Note from "./Note";
-import { IconButton } from "../Button";
 
 import { INote } from "../../models";
 import storage from "../../storage";
 
 import styles from "./notes.module.css";
 
-const STORAGE_KEY = "NOTES";
-
 export default function Notes() {
-    const initialNotes = storage.get(STORAGE_KEY, []);
+    const initialNotes = storage.get("notes", []);
     const [notes, setNotes] = useState<INote[]>(initialNotes);
 
-    useEffect(() => storage.set(STORAGE_KEY, notes), [notes]);
+    useEffect(() => storage.set("notes", notes), [notes]);
 
-    const onAddNote = () => {
-        let newNote: INote = {
-            id: uniqueId(`abc-${Date.now()}-xyz`),
-            title: "Empty note title",
-            content: "Empty note content",
-            date: Date.now().toString(),
-        };
+    const onAddNote = () =>
+        setNotes(oldNotes => [
+            {
+                id: uniqueId(`abc-${Date.now()}-xyz`),
+                title: "Empty note title",
+                content: "Empty note content",
+                date: Date.now().toString(),
+            },
+            ...oldNotes
+        ]);
 
-        setNotes(oldNotes => [newNote, ...oldNotes]);
-    };
+    const onUpdateNote = (note: INote) => setNotes(oldNotes => oldNotes.map(n => n.id === note.id ? note : n));
 
-    const onUpdateNote = (note: INote) => {
-        setNotes(oldNotes => oldNotes.map(n => n.id === note.id ? note : n));
-    };
+    const onDeleteNote = (note: INote) => setNotes(oldNotes => oldNotes.filter(n => n.id !== note.id));
 
-    const onDeleteNote = (note: INote) => {
-        setNotes(oldNotes => oldNotes.filter(n => n.id !== note.id));
-    };
+    const onClearNotes = () => setNotes([]);
 
     return (
-        <>
-            <header>
-                <IconButton onClick={onAddNote} className={styles.AddBtn} icon={faPlus} />
-                <IconButton onClick={() => setNotes([])} className={styles.AddBtn} icon={faTrash} />
-            </header>
-            <main className={styles.Notes}>
-                {notes.map(note =>
-                    <Note
-                        {...note}
-                        key={note.id} 
-                        onUpdateNote={onUpdateNote}
-                        onDeleteNote={onDeleteNote}
-                    />
-                )}
-            </main>
-            <footer></footer>
-        </>
+        <div className={styles.notes}>
+            {notes.map(note =>
+                <Note
+                    {...note}
+                    key={note.id}
+                    onUpdateNote={onUpdateNote}
+                    onDeleteNote={onDeleteNote}
+                />
+            )}
+            <nav className={styles.nav}>
+                <div>
+                    <button onClick={onAddNote} className={styles.btn}>
+                        <FontAwesomeIcon icon={faPlus} />
+                    </button>
+                    <button onClick={onClearNotes} className={styles.btn}>
+                        <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                </div>
+            </nav>
+        </div>
     );
 }
