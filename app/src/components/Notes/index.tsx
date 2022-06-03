@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { uniqueId } from "lodash";
 
 import Note from "./Note";
 
@@ -11,15 +10,16 @@ import storage from "../../storage";
 import styles from "./notes.module.css";
 
 export default function Notes() {
-    const initialNotes = storage.get("notes", []);
-    const [notes, setNotes] = useState<INote[]>(initialNotes);
+    const [notes, setNotes] = React.useState<INote[]>(storage.get("notes", []));
 
-    useEffect(() => storage.set("notes", notes), [notes]);
+    React.useEffect(() => {
+        storage.set("notes", notes); 
+    }, [notes]);
 
     const onAddNote = () =>
         setNotes(oldNotes => [
             {
-                id: uniqueId(`abc-${Date.now()}-xyz`),
+                id: Math.random().toString(16).slice(2),
                 title: "Empty note title",
                 content: "Empty note content",
                 date: Date.now().toString(),
@@ -37,8 +37,8 @@ export default function Notes() {
         <div className={styles.notes}>
             {notes.map(note =>
                 <Note
-                    {...note}
                     key={note.id}
+                    note={note}
                     onUpdateNote={onUpdateNote}
                     onDeleteNote={onDeleteNote}
                 />
