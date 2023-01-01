@@ -13,7 +13,7 @@ export default function Notes() {
     const [notes, setNotes] = React.useState<INote[]>(storage.get("notes", []));
 
     React.useEffect(() => {
-        storage.set("notes", notes); 
+        storage.set("notes", notes);
     }, [notes]);
 
     const onAddNote = () =>
