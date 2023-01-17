@@ -1,8 +1,6 @@
 {
   "name": "sticky-notes",
-  "version": "3.0.0",
-  "private": true,
-  "type": "module",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
